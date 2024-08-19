@@ -1,0 +1,32 @@
+# .air.toml
+
+# Command to run when files change
+cmd = "make serve" # Adjust to your start command
+
+# List of files and directories to watch
+[watch]
+includes = ["*.go", "**/*.go"]
+
+
+# Configure build
+[build]
+cmd = "go build -o ./bin/grafana ./pkg/cmd/grafana-server" # Adjust as needed
+bin = "./bin/grafana"
+full_bin = "./bin/grafana"
+
+excludes = [
+    "vendor/**",       # Go module dependencies
+    "node_modules/**", # Exclude all node_modules
+    ".git/**",         # Git version control
+    "tmp/**",          # Temporary files
+    "*.test.go"        # Test files
+]
+
+exclude_dir = ["assets", "tmp", "vendor", "node_modules", ".yarn", "conf", "data", "devenv", "docs", "e2e", "emails", "grafana-mixin", "packages", "packaging", "public", "scripts", "tools"]
+
+# Profile settings (optional, depending on your needs)
+[profile]
+addr = "0.0.0.0"
+port = 6000
+block_rate = 1
+mutex_rate = 5
